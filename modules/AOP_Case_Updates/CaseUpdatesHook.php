@@ -103,8 +103,8 @@ class CaseUpdatesHook {
         $case_update->internal = $bean->internal;
         $bean->internal = false;
         $case_update->assigned_user_id = $current_user->id;
-        if(strlen($text) > $this->slug_size){
-            $case_update->name = substr($text,0,$this->slug_size)."...";
+        if(sugar_strlen($text) > $this->slug_size){
+            $case_update->name = sugar_substr($text,0,$this->slug_size)."...";
         }
         $case_update->description = nl2br($text);
         $case_update->case_id = $bean->id;
@@ -185,10 +185,11 @@ class CaseUpdatesHook {
     public function unquoteEmail($text){
         global $app_strings;
         $text = html_entity_decode($text);
-        $text = preg_replace('/(\r\n|\r|\n)/s',"\n",$text);
-        $pos = strpos($text,$app_strings['LBL_AOP_EMAIL_REPLY_DELIMITER']);
+        $text = preg_replace('/(\r\n|\r|\n)/s',"\n",$text);         
+        // NOTE: e-mail address can have multi-byte chars entered by mistake
+        $pos = sugar_strpos($text,$app_strings['LBL_AOP_EMAIL_REPLY_DELIMITER']);
         if($pos !== false){
-            $text = substr($text,0,$pos);
+            $text = sugar_substr($text,0,$pos);
         }
         return $text;
     }

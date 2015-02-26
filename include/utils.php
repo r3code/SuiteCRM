@@ -4422,6 +4422,31 @@ function filterInboundEmailPopSelection($protocol)
 }
 
 /**
+ * The function is used because currently we are not supporting 
+ * mbstring.func_overload
+ * For some user using mssql without FreeTDS, they may store multibyte charaters 
+ * in varchar using latin_general collation. It cannot store so many mutilbyte 
+ * characters, so we need to use strlen.
+ * The varchar in MySQL, Orcale, and nvarchar in FreeTDS, we can store 
+ * $length mutilbyte charaters in it. We need mb_strlen to keep more info.
+ * @returns string len is specified charset.
+ */
+function sugar_strlen($string, $charset='UTF-8')
+{
+    return mb_strlen($string, $charset);
+}
+
+/**
+ * The function should be used for all user input string to allow 
+ * normal work with multi-byte strings
+ * @returns string len is specified charset.
+ */
+function sugar_strpos($string, $charset='UTF-8')
+{
+    return mb_strpos($string, $charset);
+}
+
+/**
  * The function is used because currently we are not supporting mbstring.func_overload
  * For some user using mssql without FreeTDS, they may store multibyte charaters in varchar using latin_general collation. It cannot store so many mutilbyte characters, so we need to use strlen.
  * The varchar in MySQL, Orcale, and nvarchar in FreeTDS, we can store $length mutilbyte charaters in it. we need mb_substr to keep more info.
