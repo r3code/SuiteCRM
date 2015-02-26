@@ -219,7 +219,6 @@ $out2 .=<<<EOQ2
     <td>&nbsp;</td>
     <td nowrap><b>{$mod_strings['LBL_DBCONF_DB_PASSWORD']}</b></td>
     <td nowrap align="left"><input type="password" name="setup_db_sugarsales_password_entry" value="{$setup_db_sugarsales_password}" /><input type="hidden" name="setup_db_sugarsales_password" value="{$setup_db_sugarsales_password}" /></td>
-    <input type="hidden" name="setup_db_sugarsales_password" value="{$_SESSION['setup_db_sugarsales_password']}" /></td>
 </tr>
 <tr>
     <td>&nbsp;</td>
@@ -275,7 +274,7 @@ $out4 =<<<EOQ4
 
 <script>
 
-$('#fts_type').change(function(){
+$('#setup_fts_type').change(function(){
     if($(this).val() == '')
         hideFTSSettings();
     else
